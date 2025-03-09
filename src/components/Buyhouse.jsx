@@ -154,7 +154,7 @@ const BuyHouse = () => {
           </DialogHeader>
 
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
               <FormField
                 control={form.control}
                 name="name"
@@ -262,43 +262,6 @@ const BuyHouse = () => {
                     <FormLabel>Your Budget</FormLabel>
                     <FormControl>
                       <Input placeholder="$300,000" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="financing"
-                render={({ field }) => (
-                  <FormItem className="space-y-3">
-                    <FormLabel>Financing Option</FormLabel>
-                    <FormControl>
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        className="flex flex-col space-y-1"
-                      >
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="mortgage" />
-                          </FormControl>
-                          <FormLabel className="font-normal">Mortgage</FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="cash" />
-                          </FormControl>
-                          <FormLabel className="font-normal">Cash Purchase</FormLabel>
-                        </FormItem>
-                        <FormItem className="flex items-center space-x-3 space-y-0">
-                          <FormControl>
-                            <RadioGroupItem value="undecided" />
-                          </FormControl>
-                          <FormLabel className="font-normal">Not Sure Yet</FormLabel>
-                        </FormItem>
-                      </RadioGroup>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
