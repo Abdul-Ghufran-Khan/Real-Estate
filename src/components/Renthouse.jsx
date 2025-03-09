@@ -120,7 +120,7 @@ const Renthouse = () => {
                         RentAHouse simplifies your home search by offering a wide range of rental properties. Browse listings, compare prices, and find the perfect place to call home all in one convenient platform.
                     </p>
                     <div className="flex justify-center">
-                        <Button className="gap-3 p-5 py-">
+                        <Button className="gap-3 p-5 py-2">
                             <Phone className="h-4 w-4" />
                             <span className="hidden lg:inline">Contact Agent</span>
                         </Button>
