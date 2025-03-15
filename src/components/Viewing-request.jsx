@@ -265,7 +265,7 @@ export default function ViewingRequests({ onAddSchedule, setActiveTab, scheduled
                           {request.status !== "pending" && (
                             <div className="flex justify-end">
                               <DialogClose asChild>
-                                <Button variant="outline">Close</Button>
+                                <Button>Close</Button>
                               </DialogClose>
                             </div>
                           )}
