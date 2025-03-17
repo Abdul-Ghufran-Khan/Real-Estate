@@ -145,7 +145,7 @@ export default function Schedules({ schedules = [], setActiveTab }) {
               </Button>
               <Button variant="outline" onClick={() => setActiveTab("viewing")}>
                 <Eye className="h-3 w-3"/>
-                Viewing Req
+                Viewing Reqs
               </Button>
             </div>
           </div>
