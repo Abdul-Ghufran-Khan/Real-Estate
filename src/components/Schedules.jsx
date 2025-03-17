@@ -141,7 +141,7 @@ export default function Schedules({ schedules = [], setActiveTab }) {
             <div className="flex gap-2 mt-4">
               <Button variant="outline" onClick={() => setActiveTab("rental")}>
                 <Home className="h-3 w-3"/>
-                Rental Req
+                Rental Reqs
               </Button>
               <Button variant="outline" onClick={() => setActiveTab("viewing")}>
                 <Eye className="h-3 w-3"/>
