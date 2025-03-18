@@ -134,7 +134,7 @@ export default function Schedules({ schedules = [], setActiveTab }) {
           </div>
         ) : (
           // Show a nice empty state when there are no schedules
-          <div className="flex flex-col items-center justify-center py-12 text-center">
+          <div className="flex flex-col items-center justify-center py-10 text-center">
             <Calendar className="h-12 w-12 text-muted-foreground mb-4" />
             <h3 className="text-lg font-medium">No Scheduled Appointments</h3>
             <p className="text-muted-foreground mt-2">Approve rental or viewing requests to create schedules.</p>
