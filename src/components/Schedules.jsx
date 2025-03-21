@@ -114,7 +114,7 @@ export default function Schedules({ schedules = [], setActiveTab }) {
                               </div>
                               <div className="flex justify-end gap-2">
                                 <Button variant="outline">
-                                  <Calendar className="h-4 w-4 mr-1" />
+                                  <Calendar className="h-4 w-4 mr-2" />
                                   Reschedule
                                 </Button>
                                 <Button variant="destructive">
