@@ -79,6 +79,30 @@ const Renthouse = () => {
         sqft: 3500,
         location: "San Francisco, CA",
       },
+      {
+        image: "https://i.pinimg.com/474x/49/c8/93/49c8930905de59661305414c9810c5de.jpg",
+        price: "$36,00",
+        beds: 5,
+        baths: 4,
+        sqft: 3500,
+        location: "San Francisco, CA",
+      },
+      {
+        image: "https://i.pinimg.com/474x/49/c8/93/49c8930905de59661305414c9810c5de.jpg",
+        price: "$43,00",
+        beds: 5,
+        baths: 4,
+        sqft: 3500,
+        location: "San Francisco, CA",
+      },
+      {
+        image: "https://i.pinimg.com/474x/49/c8/93/49c8930905de59661305414c9810c5de.jpg",
+        price: "$29,00",
+        beds: 5,
+        baths: 4,
+        sqft: 3500,
+        location: "San Francisco, CA",
+      },
     ]
   
     const form = useForm({
