@@ -76,6 +76,30 @@ const BuyHouse = () => {
       sqft: 3700,
       location: "San Diego, CA",
     },
+    {
+      image: "https://i.pinimg.com/236x/71/4d/ab/714dab0db35a79b425fa3aa2c714eeac.jpg",
+      price: "$650,000",
+      beds: 5,
+      baths: 4,
+      sqft: 3700,
+      location: "San Diego, CA",
+    },
+    {
+      image: "https://i.pinimg.com/236x/71/4d/ab/714dab0db35a79b425fa3aa2c714eeac.jpg",
+      price: "$630,000",
+      beds: 5,
+      baths: 4,
+      sqft: 3700,
+      location: "San Diego, CA",
+    },
+    {
+      image: "https://i.pinimg.com/236x/71/4d/ab/714dab0db35a79b425fa3aa2c714eeac.jpg",
+      price: "$610,000",
+      beds: 5,
+      baths: 4,
+      sqft: 3700,
+      location: "San Diego, CA",
+    },
   ];
   
 
