@@ -80,7 +80,7 @@ const Renthouse = () => {
         location: "San Francisco, CA",
       },
       {
-        image: "https://i.pinimg.com/474x/49/c8/93/49c8930905de59661305414c9810c5de.jpg",
+        image: "https://i.pinimg.com/474x/f5/b2/f8/f5b2f89b60d49038b9bd6b8b591a506e.jpg",
         price: "$36,00",
         beds: 5,
         baths: 4,
@@ -88,7 +88,7 @@ const Renthouse = () => {
         location: "San Francisco, CA",
       },
       {
-        image: "https://i.pinimg.com/474x/49/c8/93/49c8930905de59661305414c9810c5de.jpg",
+        image: "https://i.pinimg.com/736x/7b/2d/2c/7b2d2cecc81720411ec55c2c39e74971.jpg",
         price: "$43,00",
         beds: 5,
         baths: 4,
@@ -96,7 +96,7 @@ const Renthouse = () => {
         location: "San Francisco, CA",
       },
       {
-        image: "https://i.pinimg.com/474x/49/c8/93/49c8930905de59661305414c9810c5de.jpg",
+        image: "https://i.pinimg.com/736x/48/db/88/48db8895103445f64e6f46fe93e90012.jpg",
         price: "$29,00",
         beds: 5,
         baths: 4,
