@@ -77,7 +77,7 @@ const BuyHouse = () => {
       location: "San Diego, CA",
     },
     {
-      image: "https://i.pinimg.com/236x/71/4d/ab/714dab0db35a79b425fa3aa2c714eeac.jpg",
+      image: "https://i.pinimg.com/736x/ce/89/6e/ce896eb536bc4740bddbee62a7c27e21.jpg",
       price: "$650,000",
       beds: 5,
       baths: 4,
@@ -85,7 +85,7 @@ const BuyHouse = () => {
       location: "San Diego, CA",
     },
     {
-      image: "https://i.pinimg.com/236x/71/4d/ab/714dab0db35a79b425fa3aa2c714eeac.jpg",
+      image: "https://i.pinimg.com/736x/8f/8b/13/8f8b136a33bd80a3e8acd9ca2c23948a.jpg",
       price: "$630,000",
       beds: 5,
       baths: 4,
@@ -93,7 +93,7 @@ const BuyHouse = () => {
       location: "San Diego, CA",
     },
     {
-      image: "https://i.pinimg.com/236x/71/4d/ab/714dab0db35a79b425fa3aa2c714eeac.jpg",
+      image: "https://i.pinimg.com/736x/0a/11/b0/0a11b0e11972974b627a52c57a9dc2ea.jpg",
       price: "$610,000",
       beds: 5,
       baths: 4,
