@@ -133,7 +133,7 @@ const BuyHouse = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-2">
+    <div className="container mx-auto px-4 py-3">
       <h1 className="mt-14 text-3xl font-bold">Premium Properties For Sale</h1>
       <div className="mt-6 grid gap-8 md:grid-cols-3">
         {houses.map((item, index) => (
