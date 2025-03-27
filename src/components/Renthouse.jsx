@@ -119,7 +119,7 @@ const Renthouse = () => {
   
     function onSubmit(values) {
       // In a real app, you would send this data to your backend
-      console.log(values)
+      console.log("Formdata of book villa ==>",values)
       console.log("Booking for property:", selectedHouse)
   
       toast.success("Booking request submitted!", {

@@ -11,7 +11,6 @@ import { useForm } from "react-hook-form"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -117,7 +116,7 @@ const BuyHouse = () => {
 
   function onSubmit(values) {
     // In a real app, you would send this data to your backend
-    console.log(values)
+    console.log("formdata of buy house ==>",values)
     console.log("Inquiry for property:", selectedHouse)
 
     toast.success("Inquiry submitted!", {
