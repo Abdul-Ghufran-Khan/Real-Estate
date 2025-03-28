@@ -114,7 +114,7 @@ export default function RentalRequests({ onAddSchedule, setActiveTab, scheduledR
     // Return different badge styles based on status
     if (status === "pending") {
       return (
-        <Badge variant="outline" className="bg-yellow-50 text-yellow-700 border-yellow-200">
+        <Badge variant="outline" className="bg-yellow-50 text-yellow-700 border-yellow-300">
           Pending
         </Badge>
       )
