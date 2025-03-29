@@ -151,10 +151,10 @@ const Navbar = ({ onBuyClick , onRentClick }) => {
                 <div className="space-y-3">
                   <p className="text-lg font-medium">Properties</p>
                   <div className="flex flex-col gap-2 pl-4">
-                    <a href="#buy" className="text-sm hover:text-primary">
+                    <a href="#buy" className="text-sm hover:text-primary" onClick={onBuyClick}>
                       Buy
                     </a>
-                    <a href="#rent" className="text-sm hover:text-primary">
+                    <a href="#rent" className="text-sm hover:text-primary" onClick={onRentClick}>
                       Rent
                     </a>
                     <a href="#new-developments" className="text-sm hover:text-primary">
