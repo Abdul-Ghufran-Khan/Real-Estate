@@ -6,7 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 
-const Navbar = () => {
+const Navbar = ({ onBuyClick , onRentClick }) => {
   const navigate = useNavigate()
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isAdminOpen, setIsAdminOpen] = useState(false)
@@ -45,10 +45,10 @@ const Navbar = () => {
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="center">
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={onBuyClick}>
                 <a href="#buy">Buy</a>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={onRentClick}>
                 <a href="#rent">Rent</a>
               </DropdownMenuItem>
               <DropdownMenuItem>
