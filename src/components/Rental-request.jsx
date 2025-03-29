@@ -95,10 +95,6 @@ export default function RentalRequests({ onAddSchedule, setActiveTab, scheduledR
       // We'll include all the request data so the schedule component has everything it needs
       requestData: request,
     })
-
-    // Close the dialog and switch to the schedule tab
-    setOpenDialogId(null)
-    setActiveTab("schedule")
   }
 
   // When we reject a rental request
