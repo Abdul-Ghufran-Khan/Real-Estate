@@ -1,4 +1,6 @@
-import { useState , useEffect } from "react"
+"use client"
+
+import { useState } from "react"
 import { Eye, Check, X, Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -70,31 +72,20 @@ const dummyRentalRequests = [
   },
 ]
 
-export default function RentalRequests({ onAddSchedule, scheduledRequestIds }) {
+export default function RentalRequests() {
   // We'll manage our own rental requests data right here
   const [rentalRequests, setRentalRequests] = useState(dummyRentalRequests)
   const [openDialogId, setOpenDialogId] = useState(null)
 
   // When we approve a rental request
   const approveRental = (id) => {
-    // Find the request we're approving
-    const request = rentalRequests.find((req) => req.id === id)
-    if (!request) return
-
     // Update its status in our local state
     setRentalRequests((currentRequests) =>
       currentRequests.map((req) => (req.id === id ? { ...req, status: "approved" } : req)),
     )
 
-    // Let the parent component know we've approved this for scheduling
-    onAddSchedule({
-      id: Date.now(), // Just a quick way to get a unique ID
-      type: "rental",
-      requestId: id,
-      scheduledDate: request.checkInDate,
-      // We'll include all the request data so the schedule component has everything it needs
-      requestData: request,
-    })
+    // Close the dialog
+    setOpenDialogId(null)
   }
 
   // When we reject a rental request
@@ -131,111 +122,102 @@ export default function RentalRequests({ onAddSchedule, scheduledRequestIds }) {
     return <Badge variant="outline">{status}</Badge>
   }
 
-  // Check if a request has already been scheduled
-  const isScheduled = (id) => scheduledRequestIds.includes(id)
-
   return (
-    <Card>
-      <CardHeader>
+    <Card className="shadow-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+      <CardHeader className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
         <CardTitle className="flex items-center gap-2">
-          <Home className="h-5 w-5" />
+          <Home className="h-5 w-5 text-black dark:text-white" />
           Rental Requests
         </CardTitle>
         <CardDescription>Manage all incoming rental requests for properties</CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="rounded-md border overflow-hidden">
+      <CardContent className="p-6">
+        <div className="rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
             <Table>
-              <TableHeader>
+              <TableHeader className="bg-gray-50 dark:bg-gray-900">
                 <TableRow>
-                  <TableHead className="w-[80px]">ID</TableHead>
-                  <TableHead>Client</TableHead>
-                  <TableHead className="hidden md:table-cell">Email</TableHead>
-                  <TableHead className="hidden sm:table-cell">Phone</TableHead>
-                  <TableHead className="hidden lg:table-cell">Check In</TableHead>
-                  <TableHead className="hidden lg:table-cell">Check Out</TableHead>
-                  <TableHead className="hidden md:table-cell">Guests</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="w-[80px] font-semibold">ID</TableHead>
+                  <TableHead className="font-semibold">Client</TableHead>
+                  <TableHead className="hidden md:table-cell font-semibold">Email</TableHead>
+                  <TableHead className="hidden sm:table-cell font-semibold">Phone</TableHead>
+                  <TableHead className="hidden lg:table-cell font-semibold">Check In</TableHead>
+                  <TableHead className="hidden lg:table-cell font-semibold">Check Out</TableHead>
+                  <TableHead className="hidden md:table-cell font-semibold">Guests</TableHead>
+                  <TableHead className="font-semibold">Status</TableHead>
+                  <TableHead className="text-right font-semibold">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {rentalRequests.map((request) => (
-                  <TableRow key={request.id}>
+                  <TableRow key={request.id} className="hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
                     <TableCell className="font-medium">{request.id}</TableCell>
-                    <TableCell>{request.name}</TableCell>
+                    <TableCell className="font-medium">{request.name}</TableCell>
                     <TableCell className="hidden md:table-cell">{request.email}</TableCell>
                     <TableCell className="hidden sm:table-cell">{request.phone}</TableCell>
                     <TableCell className="hidden lg:table-cell">{request.checkInDate}</TableCell>
                     <TableCell className="hidden lg:table-cell">{request.checkOutDate}</TableCell>
                     <TableCell className="hidden md:table-cell">{request.guests}</TableCell>
-                    <TableCell>
-                      {/* Show scheduled badge if it's in the scheduled list */}
-                      {isScheduled(request.id) ? (
-                        <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                          Scheduled
-                        </Badge>
-                      ) : (
-                        getStatusBadge(request.status)
-                      )}
-                    </TableCell>
+                    <TableCell>{getStatusBadge(request.status)}</TableCell>
                     <TableCell className="text-right">
                       <Dialog
                         open={openDialogId === request.id}
                         onOpenChange={(open) => (open ? setOpenDialogId(request.id) : setOpenDialogId(null))}
                       >
                         <DialogTrigger asChild>
-                          <Button variant="outline" size="sm">
-                            <Eye className="h-3.5 w-3.5 mr-1" />
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                          >
+                            <Eye className="h-3.5 w-3.5 mr-1 text-black dark:text-white" />
                             <span className="hidden sm:inline">View</span>
                           </Button>
                         </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>Rental Request Details</DialogTitle>
+                        <DialogContent className="sm:max-w-md">
+                          <DialogHeader className="border-b pb-4">
+                            <DialogTitle className="text-xl">Rental Request Details</DialogTitle>
                             <DialogDescription>Request ID: {request.id}</DialogDescription>
                           </DialogHeader>
                           <div className="grid gap-4 py-4">
-                            <div className="grid grid-cols-2 gap-2">
-                              <div className="font-medium">Client:</div>
-                              <div>{request.name}</div>
-                              <div className="font-medium">Email:</div>
+                            <div className="grid grid-cols-2 gap-3">
+                              <div className="font-medium text-gray-500">Client:</div>
+                              <div className="font-semibold">{request.name}</div>
+                              <div className="font-medium text-gray-500">Email:</div>
                               <div>{request.email}</div>
-                              <div className="font-medium">Phone:</div>
+                              <div className="font-medium text-gray-500">Phone:</div>
                               <div>{request.phone}</div>
-                              <div className="font-medium">Property:</div>
-                              <div>{request.propertyName}</div>
-                              <div className="font-medium">Property ID:</div>
+                              <div className="font-medium text-gray-500">Property:</div>
+                              <div className="font-semibold">{request.propertyName}</div>
+                              <div className="font-medium text-gray-500">Property ID:</div>
                               <div>{request.propertyId}</div>
-                              <div className="font-medium">Check In Date:</div>
+                              <div className="font-medium text-gray-500">Check In Date:</div>
                               <div>{request.checkInDate}</div>
-                              <div className="font-medium">Check Out Date:</div>
+                              <div className="font-medium text-gray-500">Check Out Date:</div>
                               <div>{request.checkOutDate}</div>
-                              <div className="font-medium">Number of Guests:</div>
+                              <div className="font-medium text-gray-500">Number of Guests:</div>
                               <div>{request.guests}</div>
-                              <div className="font-medium">Request Date:</div>
+                              <div className="font-medium text-gray-500">Request Date:</div>
                               <div>{request.requestDate}</div>
-                              <div className="font-medium">Status:</div>
-                              <div>
-                                {isScheduled(request.id) ? (
-                                  <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                                    Scheduled
-                                  </Badge>
-                                ) : (
-                                  getStatusBadge(request.status)
-                                )}
-                              </div>
+                              <div className="font-medium text-gray-500">Status:</div>
+                              <div>{getStatusBadge(request.status)}</div>
                             </div>
                           </div>
                           {/* Only show approve/reject buttons if it's still pending */}
                           {request.status === "pending" && (
                             <div className="flex justify-end gap-2">
-                              <Button variant="outline" onClick={() => rejectRental(request.id)}>
+                              <Button
+                                variant="outline"
+                                onClick={() => rejectRental(request.id)}
+                                className="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
+                              >
                                 <X className="h-4 w-4 mr-1" />
                                 Reject
                               </Button>
-                              <Button onClick={() => approveRental(request.id)}>
+                              <Button
+                                onClick={() => approveRental(request.id)}
+                                className="bg-black hover:bg-gray-800 text-white"
+                              >
                                 <Check className="h-4 w-4 mr-1" />
                                 Approve
                               </Button>
@@ -244,7 +226,7 @@ export default function RentalRequests({ onAddSchedule, scheduledRequestIds }) {
                           {request.status !== "pending" && (
                             <div className="flex justify-end">
                               <DialogClose asChild>
-                                <Button>Close</Button>
+                                <Button className="bg-black hover:bg-gray-800 text-white">Close</Button>
                               </DialogClose>
                             </div>
                           )}

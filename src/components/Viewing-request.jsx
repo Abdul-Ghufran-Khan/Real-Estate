@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import { Eye, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -66,36 +68,28 @@ const dummyViewingRequests = [
   },
 ]
 
-export default function ViewingRequests({ onAddSchedule, setActiveTab, scheduledRequestIds }) {
+export default function ViewingRequests() {
   // We'll manage our own viewing requests data right here
   const [viewingRequests, setViewingRequests] = useState(dummyViewingRequests)
   const [openDialogId, setOpenDialogId] = useState(null)
 
   // When a viewing request is approved with a specific time
   const approveViewing = (id, timeSlot) => {
-    // Find the request we're approving
-    const request = viewingRequests.find((req) => req.id === id)
-    if (!request) return
-
     // Update its status in our local state
     setViewingRequests((currentRequests) =>
-      currentRequests.map((req) => (req.id === id ? { ...req, status: "approved" } : req)),
+      currentRequests.map((req) =>
+        req.id === id
+          ? {
+              ...req,
+              status: "approved",
+              scheduledTime: timeSlot,
+            }
+          : req,
+      ),
     )
 
-    // Let the parent component know we've approved this for scheduling
-    onAddSchedule({
-      id: Date.now(), // Quick unique ID
-      type: "viewing",
-      requestId: id,
-      scheduledDate: request.preferredViewDate,
-      scheduledTime: timeSlot,
-      // Include all request data for the schedule component
-      requestData: request,
-    })
-
-    // Close the dialog and switch to the schedule tab
+    // Close the dialog
     setOpenDialogId(null)
-    setActiveTab("schedule")
   }
 
   // When we reject a viewing request
@@ -132,129 +126,127 @@ export default function ViewingRequests({ onAddSchedule, setActiveTab, scheduled
     return <Badge variant="outline">{status}</Badge>
   }
 
-  // Check if a request has already been scheduled
-  const isScheduled = (id) => scheduledRequestIds.includes(id)
-
   return (
-    <Card>
-      <CardHeader>
+    <Card className="shadow-md border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
+      <CardHeader className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
         <CardTitle className="flex items-center gap-2">
-          <Eye className="h-5 w-5" />
+          <Eye className="h-5 w-5 text-black dark:text-white" />
           Viewing Requests
         </CardTitle>
         <CardDescription>Manage property viewing requests from potential clients</CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="rounded-md border overflow-hidden">
+      <CardContent className="p-6">
+        <div className="rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
           <div className="overflow-x-auto">
             <Table>
-              <TableHeader>
+              <TableHeader className="bg-gray-50 dark:bg-gray-900">
                 <TableRow>
-                  <TableHead className="w-[80px]">ID</TableHead>
-                  <TableHead>Client</TableHead>
-                  <TableHead className="hidden md:table-cell">Email</TableHead>
-                  <TableHead className="hidden sm:table-cell">Phone</TableHead>
-                  <TableHead className="hidden lg:table-cell">Preferred Date</TableHead>
-                  <TableHead className="hidden md:table-cell">Budget</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="w-[80px] font-semibold">ID</TableHead>
+                  <TableHead className="font-semibold">Client</TableHead>
+                  <TableHead className="hidden md:table-cell font-semibold">Email</TableHead>
+                  <TableHead className="hidden sm:table-cell font-semibold">Phone</TableHead>
+                  <TableHead className="hidden lg:table-cell font-semibold">Preferred Date</TableHead>
+                  <TableHead className="hidden md:table-cell font-semibold">Budget</TableHead>
+                  <TableHead className="font-semibold">Status</TableHead>
+                  <TableHead className="text-right font-semibold">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {viewingRequests.map((request) => (
-                  <TableRow key={request.id}>
+                  <TableRow key={request.id} className="hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors">
                     <TableCell className="font-medium">{request.id}</TableCell>
-                    <TableCell>{request.name}</TableCell>
+                    <TableCell className="font-medium">{request.name}</TableCell>
                     <TableCell className="hidden md:table-cell">{request.email}</TableCell>
                     <TableCell className="hidden sm:table-cell">{request.phone}</TableCell>
                     <TableCell className="hidden lg:table-cell">{request.preferredViewDate}</TableCell>
                     <TableCell className="hidden md:table-cell">{request.budget}</TableCell>
-                    <TableCell>
-                      {/* Show scheduled badge if it's in the scheduled list */}
-                      {isScheduled(request.id) ? (
-                        <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                          Scheduled
-                        </Badge>
-                      ) : (
-                        getStatusBadge(request.status)
-                      )}
-                    </TableCell>
+                    <TableCell>{getStatusBadge(request.status)}</TableCell>
                     <TableCell className="text-right">
                       <Dialog
                         open={openDialogId === request.id}
                         onOpenChange={(open) => (open ? setOpenDialogId(request.id) : setOpenDialogId(null))}
                       >
                         <DialogTrigger asChild>
-                          <Button variant="outline" size="sm">
-                            <Eye className="h-3.5 w-3.5 mr-1" />
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                          >
+                            <Eye className="h-3.5 w-3.5 mr-1 text-black dark:text-white" />
                             <span className="hidden sm:inline">View</span>
                           </Button>
                         </DialogTrigger>
-                        <DialogContent>
-                          <DialogHeader>
-                            <DialogTitle>Viewing Request Details</DialogTitle>
+                        <DialogContent className="sm:max-w-md">
+                          <DialogHeader className="border-b pb-4">
+                            <DialogTitle className="text-xl">Viewing Request Details</DialogTitle>
                             <DialogDescription>Request ID: {request.id}</DialogDescription>
                           </DialogHeader>
                           <div className="grid gap-4 py-4">
-                            <div className="grid grid-cols-2 gap-2">
-                              <div className="font-medium">Client:</div>
-                              <div>{request.name}</div>
-                              <div className="font-medium">Email:</div>
+                            <div className="grid grid-cols-2 gap-3">
+                              <div className="font-medium text-gray-500">Client:</div>
+                              <div className="font-semibold">{request.name}</div>
+                              <div className="font-medium text-gray-500">Email:</div>
                               <div>{request.email}</div>
-                              <div className="font-medium">Phone:</div>
+                              <div className="font-medium text-gray-500">Phone:</div>
                               <div>{request.phone}</div>
-                              <div className="font-medium">Property:</div>
-                              <div>{request.propertyName}</div>
-                              <div className="font-medium">Property ID:</div>
+                              <div className="font-medium text-gray-500">Property:</div>
+                              <div className="font-semibold">{request.propertyName}</div>
+                              <div className="font-medium text-gray-500">Property ID:</div>
                               <div>{request.propertyId}</div>
-                              <div className="font-medium">Preferred View Date:</div>
+                              <div className="font-medium text-gray-500">Preferred View Date:</div>
                               <div>{request.preferredViewDate}</div>
-                              <div className="font-medium">Budget:</div>
+                              <div className="font-medium text-gray-500">Budget:</div>
                               <div>{request.budget}</div>
-                              <div className="font-medium">Request Date:</div>
+                              <div className="font-medium text-gray-500">Request Date:</div>
                               <div>{request.requestDate}</div>
-                              <div className="font-medium">Status:</div>
-                              <div>
-                                {isScheduled(request.id) ? (
-                                  <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
-                                    Scheduled
-                                  </Badge>
-                                ) : (
-                                  getStatusBadge(request.status)
-                                )}
-                              </div>
+                              <div className="font-medium text-gray-500">Status:</div>
+                              <div>{getStatusBadge(request.status)}</div>
+                              {request.scheduledTime && (
+                                <>
+                                  <div className="font-medium text-gray-500">Scheduled Time:</div>
+                                  <div className="font-semibold text-green-600">{request.scheduledTime}</div>
+                                </>
+                              )}
                             </div>
                           </div>
 
                           {/* Only show time selection and reject button if it's still pending */}
                           {request.status === "pending" && (
                             <div className="space-y-4">
-                              <div className="grid grid-cols-3 gap-4">
-                                <div className="col-span-3 font-medium">Select viewing time:</div>
-                                <Button
-                                  variant="outline"
-                                  className="justify-center"
-                                  onClick={() => approveViewing(request.id, "09:00")}
-                                >
-                                  9:00 AM
-                                </Button>
-                                <Button
-                                  variant="outline"
-                                  className="justify-center"
-                                  onClick={() => approveViewing(request.id, "12:00")}
-                                >
-                                  12:00 PM
-                                </Button>
-                                <Button
-                                  variant="outline"
-                                  className="justify-center"
-                                  onClick={() => approveViewing(request.id, "15:00")}
-                                >
-                                  3:00 PM
-                                </Button>
+                              <div className="bg-gray-50 dark:bg-gray-900 p-4 rounded-lg">
+                                <div className="font-medium text-gray-700 dark:text-gray-300 mb-3">
+                                  Select viewing time:
+                                </div>
+                                <div className="grid grid-cols-3 gap-3">
+                                  <Button
+                                    variant="outline"
+                                    className="justify-center hover:bg-gray-100 dark:hover:bg-gray-800"
+                                    onClick={() => approveViewing(request.id, "09:00 AM")}
+                                  >
+                                    9:00 AM
+                                  </Button>
+                                  <Button
+                                    variant="outline"
+                                    className="justify-center hover:bg-gray-100 dark:hover:bg-gray-800"
+                                    onClick={() => approveViewing(request.id, "12:00 PM")}
+                                  >
+                                    12:00 PM
+                                  </Button>
+                                  <Button
+                                    variant="outline"
+                                    className="justify-center hover:bg-gray-100 dark:hover:bg-gray-800"
+                                    onClick={() => approveViewing(request.id, "3:00 PM")}
+                                  >
+                                    3:00 PM
+                                  </Button>
+                                </div>
                               </div>
                               <div className="flex justify-end">
-                                <Button variant="outline" onClick={() => rejectViewing(request.id)}>
+                                <Button
+                                  variant="outline"
+                                  onClick={() => rejectViewing(request.id)}
+                                  className="border-red-200 text-red-600 hover:bg-red-50 hover:text-red-700"
+                                >
                                   <X className="h-4 w-4 mr-1" />
                                   Reject
                                 </Button>
@@ -265,7 +257,7 @@ export default function ViewingRequests({ onAddSchedule, setActiveTab, scheduled
                           {request.status !== "pending" && (
                             <div className="flex justify-end">
                               <DialogClose asChild>
-                                <Button>Close</Button>
+                                <Button className="bg-black hover:bg-gray-800 text-white">Close</Button>
                               </DialogClose>
                             </div>
                           )}
