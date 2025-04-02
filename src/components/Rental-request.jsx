@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState , useEffect } from "react"
 import { Eye, Check, X, Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -70,7 +70,7 @@ const dummyRentalRequests = [
   },
 ]
 
-export default function RentalRequests({ onAddSchedule, setActiveTab, scheduledRequestIds }) {
+export default function RentalRequests({ onAddSchedule, scheduledRequestIds }) {
   // We'll manage our own rental requests data right here
   const [rentalRequests, setRentalRequests] = useState(dummyRentalRequests)
   const [openDialogId, setOpenDialogId] = useState(null)
