@@ -5,6 +5,7 @@ import { Toaster } from "sonner"
 import Footer from "../components/Footer"
 import Renthouse from '@/components/Renthouse'
 import Buyhouse from '@/components/Buyhouse'
+import MonthlyStatsSection from '@/components/ChartsSection';
 
 const Landing = () => {
   const buyHouseRef = useRef(null);
@@ -28,6 +29,7 @@ const Landing = () => {
          <div ref={buyHouseRef}>
          <Buyhouse/>
          </div>
+          <MonthlyStatsSection/>
           <Footer/>
         </main>
       </>
