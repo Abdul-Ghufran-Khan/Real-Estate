@@ -82,48 +82,51 @@ export default function MonthlyStatsSection() {
                     <Card>
                         <CardHeader>
                             <CardTitle>Property Buying Statistics</CardTitle>
-                            <CardDescription>
-                                Monthly visitor and transaction data for property purchases
-                            </CardDescription>
+                            <CardDescription>Monthly visitor and transaction data for property purchases</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <ChartContainer
-                                config={{
-                                    visitors: {
-                                        label: "Visitors",
-                                        color: "hsl(var(--chart-1))",
-                                    },
-                                    transactions: {
-                                        label: "Transactions",
-                                        color: "hsl(var(--chart-2))",
-                                    },
-                                }}
-                                className="aspect-[4/3] min-h-[300px]"
-                            >
-                                <LineChart data={buyingData[selectedYear]} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                                    <XAxis dataKey="month" />
-                                    <YAxis yAxisId="left" orientation="left" />
-                                    <YAxis yAxisId="right" orientation="right" />
-                                    <ChartTooltip content={<ChartTooltipContent />} />
-                                    <Line
-                                        yAxisId="left"
-                                        type="monotone"
-                                        dataKey="visitors"
-                                        stroke="var(--color-visitors)"
-                                        strokeWidth={2}
-                                        activeDot={{ r: 6 }}
-                                    />
-                                    <Line
-                                        yAxisId="right"
-                                        type="monotone"
-                                        dataKey="transactions"
-                                        stroke="var(--color-transactions)"
-                                        strokeWidth={2}
-                                        activeDot={{ r: 6 }}
-                                    />
-                                </LineChart>
-                            </ChartContainer>
+                            <div className="w-full max-w-full overflow-x-auto">
+                                <ChartContainer
+                                    config={{
+                                        visitors: {
+                                            label: "Visitors",
+                                            color: "hsl(var(--chart-1))",
+                                        },
+                                        transactions: {
+                                            label: "Transactions",
+                                            color: "hsl(var(--chart-2))",
+                                        },
+                                    }}
+                                    className="w-full min-w-0 aspect-video"
+                                >
+                                    <LineChart
+                                        data={buyingData[selectedYear]}
+                                        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                                    >
+                                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                        <XAxis dataKey="month" />
+                                        <YAxis yAxisId="left" orientation="left" />
+                                        <YAxis yAxisId="right" orientation="right" />
+                                        <ChartTooltip content={<ChartTooltipContent />} />
+                                        <Line
+                                            yAxisId="left"
+                                            type="monotone"
+                                            dataKey="visitors"
+                                            stroke="var(--color-visitors)"
+                                            strokeWidth={2}
+                                            activeDot={{ r: 6 }}
+                                        />
+                                        <Line
+                                            yAxisId="right"
+                                            type="monotone"
+                                            dataKey="transactions"
+                                            stroke="var(--color-transactions)"
+                                            strokeWidth={2}
+                                            activeDot={{ r: 6 }}
+                                        />
+                                    </LineChart>
+                                </ChartContainer>
+                            </div>
     
                             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="rounded-lg bg-muted p-4">
@@ -146,48 +149,51 @@ export default function MonthlyStatsSection() {
                     <Card>
                         <CardHeader>
                             <CardTitle>Property Renting Statistics</CardTitle>
-                            <CardDescription>
-                                Monthly visitor and transaction data for property rentals
-                            </CardDescription>
+                            <CardDescription>Monthly visitor and transaction data for property rentals</CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <ChartContainer
-                                config={{
-                                    visitors: {
-                                        label: "Visitors",
-                                        color: "hsl(var(--chart-3))",
-                                    },
-                                    transactions: {
-                                        label: "Transactions",
-                                        color: "hsl(var(--chart-4))",
-                                    },
-                                }}
-                                className="aspect-[4/3] min-h-[300px]"
-                            >
-                                <LineChart data={rentingData[selectedYear]} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                                    <XAxis dataKey="month" />
-                                    <YAxis yAxisId="left" orientation="left" />
-                                    <YAxis yAxisId="right" orientation="right" />
-                                    <ChartTooltip content={<ChartTooltipContent />} />
-                                    <Line
-                                        yAxisId="left"
-                                        type="monotone"
-                                        dataKey="visitors"
-                                        stroke="var(--color-visitors)"
-                                        strokeWidth={2}
-                                        activeDot={{ r: 6 }}
-                                    />
-                                    <Line
-                                        yAxisId="right"
-                                        type="monotone"
-                                        dataKey="transactions"
-                                        stroke="var(--color-transactions)"
-                                        strokeWidth={2}
-                                        activeDot={{ r: 6 }}
-                                    />
-                                </LineChart>
-                            </ChartContainer>
+                            <div className="w-full max-w-full overflow-x-auto">
+                                <ChartContainer
+                                    config={{
+                                        visitors: {
+                                            label: "Visitors",
+                                            color: "hsl(var(--chart-3))",
+                                        },
+                                        transactions: {
+                                            label: "Transactions",
+                                            color: "hsl(var(--chart-4))",
+                                        },
+                                    }}
+                                    className="w-full min-w-0 aspect-video"
+                                >
+                                    <LineChart
+                                        data={rentingData[selectedYear]}
+                                        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                                    >
+                                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                        <XAxis dataKey="month" />
+                                        <YAxis yAxisId="left" orientation="left" />
+                                        <YAxis yAxisId="right" orientation="right" />
+                                        <ChartTooltip content={<ChartTooltipContent />} />
+                                        <Line
+                                            yAxisId="left"
+                                            type="monotone"
+                                            dataKey="visitors"
+                                            stroke="var(--color-visitors)"
+                                            strokeWidth={2}
+                                            activeDot={{ r: 6 }}
+                                        />
+                                        <Line
+                                            yAxisId="right"
+                                            type="monotone"
+                                            dataKey="transactions"
+                                            stroke="var(--color-transactions)"
+                                            strokeWidth={2}
+                                            activeDot={{ r: 6 }}
+                                        />
+                                    </LineChart>
+                                </ChartContainer>
+                            </div>
     
                             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div className="rounded-lg bg-muted p-4">
@@ -209,6 +215,7 @@ export default function MonthlyStatsSection() {
             </div>
         </div>
     </section>
+    
     
     )
 }
