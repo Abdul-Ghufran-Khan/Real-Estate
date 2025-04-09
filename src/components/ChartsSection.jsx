@@ -59,147 +59,156 @@ export default function MonthlyStatsSection() {
 
     return (
         <section className="w-full py-12">
-            <div className="container mx-auto px-6">
-                <div className="text-center mb-10">
-                    <h2 className="text-3xl font-bold tracking-tight">Monthly Property Statistics</h2>
-                    <p className="text-muted-foreground mt-2">
-                        Track visitor engagement and transaction rates for buying and renting properties
-                    </p>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+                <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">Monthly Property Statistics</h2>
+                <p className="text-muted-foreground mt-2 text-base sm:text-lg">
+                    Track visitor engagement and transaction rates for buying and renting properties
+                </p>
+            </div>
+    
+            <div className="flex flex-col gap-6">
+                <div className="flex justify-center sm:justify-end">
+                    <Tabs defaultValue="2023" onValueChange={setSelectedYear}>
+                        <TabsList className="flex flex-wrap">
+                            <TabsTrigger value="2023">2023</TabsTrigger>
+                            <TabsTrigger value="2024">2024</TabsTrigger>
+                        </TabsList>
+                    </Tabs>
                 </div>
-
-                <div className="grid gap-6">
-                    <div className="flex justify-end">
-                        <Tabs defaultValue="2023" onValueChange={setSelectedYear}>
-                            <TabsList>
-                                <TabsTrigger value="2023">2023</TabsTrigger>
-                                <TabsTrigger value="2024">2024</TabsTrigger>
-                            </TabsList>
-                        </Tabs>
-                    </div>
-
-                    <div className="grid gap-6 md:grid-cols-2">
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>Property Buying Statistics</CardTitle>
-                                <CardDescription>Monthly visitor and transaction data for property purchases</CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <ChartContainer
-                                    config={{
-                                        visitors: {
-                                            label: "Visitors",
-                                            color: "hsl(var(--chart-1))",
-                                        },
-                                        transactions: {
-                                            label: "Transactions",
-                                            color: "hsl(var(--chart-2))",
-                                        },
-                                    }}
-                                    className="aspect-[4/3] min-h-[300px]"
-                                >
-                                    <LineChart data={buyingData[selectedYear]} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                                        <XAxis dataKey="month" />
-                                        <YAxis yAxisId="left" orientation="left" />
-                                        <YAxis yAxisId="right" orientation="right" />
-                                        <ChartTooltip content={<ChartTooltipContent />} />
-                                        <Line
-                                            yAxisId="left"
-                                            type="monotone"
-                                            dataKey="visitors"
-                                            stroke="var(--color-visitors)"
-                                            strokeWidth={2}
-                                            activeDot={{ r: 6 }}
-                                        />
-                                        <Line
-                                            yAxisId="right"
-                                            type="monotone"
-                                            dataKey="transactions"
-                                            stroke="var(--color-transactions)"
-                                            strokeWidth={2}
-                                            activeDot={{ r: 6 }}
-                                        />
-                                    </LineChart>
-                                </ChartContainer>
-                                <div className="mt-4 grid grid-cols-2 gap-4">
-                                    <div className="rounded-lg bg-muted p-3">
-                                        <div className="text-sm font-medium">Total Visitors</div>
-                                        <div className="text-2xl font-bold">
-                                            {buyingData[selectedYear].reduce((sum, item) => sum + item.visitors, 0).toLocaleString()}
-                                        </div>
-                                    </div>
-                                    <div className="rounded-lg bg-muted p-3">
-                                        <div className="text-sm font-medium">Total Transactions</div>
-                                        <div className="text-2xl font-bold">
-                                            {buyingData[selectedYear].reduce((sum, item) => sum + item.transactions, 0).toLocaleString()}
-                                        </div>
+    
+                <div className="grid gap-6 md:grid-cols-2">
+                    {/* Property Buying Card */}
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Property Buying Statistics</CardTitle>
+                            <CardDescription>
+                                Monthly visitor and transaction data for property purchases
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <ChartContainer
+                                config={{
+                                    visitors: {
+                                        label: "Visitors",
+                                        color: "hsl(var(--chart-1))",
+                                    },
+                                    transactions: {
+                                        label: "Transactions",
+                                        color: "hsl(var(--chart-2))",
+                                    },
+                                }}
+                                className="aspect-[4/3] min-h-[300px]"
+                            >
+                                <LineChart data={buyingData[selectedYear]} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                    <XAxis dataKey="month" />
+                                    <YAxis yAxisId="left" orientation="left" />
+                                    <YAxis yAxisId="right" orientation="right" />
+                                    <ChartTooltip content={<ChartTooltipContent />} />
+                                    <Line
+                                        yAxisId="left"
+                                        type="monotone"
+                                        dataKey="visitors"
+                                        stroke="var(--color-visitors)"
+                                        strokeWidth={2}
+                                        activeDot={{ r: 6 }}
+                                    />
+                                    <Line
+                                        yAxisId="right"
+                                        type="monotone"
+                                        dataKey="transactions"
+                                        stroke="var(--color-transactions)"
+                                        strokeWidth={2}
+                                        activeDot={{ r: 6 }}
+                                    />
+                                </LineChart>
+                            </ChartContainer>
+    
+                            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="rounded-lg bg-muted p-4">
+                                    <div className="text-sm font-medium">Total Visitors</div>
+                                    <div className="text-2xl font-bold">
+                                        {buyingData[selectedYear].reduce((sum, item) => sum + item.visitors, 0).toLocaleString()}
                                     </div>
                                 </div>
-                            </CardContent>
-                        </Card>
-
-                        <Card>
-                            <CardHeader>
-                                <CardTitle>Property Renting Statistics</CardTitle>
-                                <CardDescription>Monthly visitor and transaction data for property rentals</CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <ChartContainer
-                                    config={{
-                                        visitors: {
-                                            label: "Visitors",
-                                            color: "hsl(var(--chart-3))",
-                                        },
-                                        transactions: {
-                                            label: "Transactions",
-                                            color: "hsl(var(--chart-4))",
-                                        },
-                                    }}
-                                    className="aspect-[4/3] min-h-[300px]"
-                                >
-                                    <LineChart data={rentingData[selectedYear]} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                                        <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                                        <XAxis dataKey="month" />
-                                        <YAxis yAxisId="left" orientation="left" />
-                                        <YAxis yAxisId="right" orientation="right" />
-                                        <ChartTooltip content={<ChartTooltipContent />} />
-                                        <Line
-                                            yAxisId="left"
-                                            type="monotone"
-                                            dataKey="visitors"
-                                            stroke="var(--color-visitors)"
-                                            strokeWidth={2}
-                                            activeDot={{ r: 6 }}
-                                        />
-                                        <Line
-                                            yAxisId="right"
-                                            type="monotone"
-                                            dataKey="transactions"
-                                            stroke="var(--color-transactions)"
-                                            strokeWidth={2}
-                                            activeDot={{ r: 6 }}
-                                        />
-                                    </LineChart>
-                                </ChartContainer>
-                                <div className="mt-4 grid grid-cols-2 gap-4">
-                                    <div className="rounded-lg bg-muted p-3">
-                                        <div className="text-sm font-medium">Total Visitors</div>
-                                        <div className="text-2xl font-bold">
-                                            {rentingData[selectedYear].reduce((sum, item) => sum + item.visitors, 0).toLocaleString()}
-                                        </div>
-                                    </div>
-                                    <div className="rounded-lg bg-muted p-3">
-                                        <div className="text-sm font-medium">Total Transactions</div>
-                                        <div className="text-2xl font-bold">
-                                            {rentingData[selectedYear].reduce((sum, item) => sum + item.transactions, 0).toLocaleString()}
-                                        </div>
+                                <div className="rounded-lg bg-muted p-4">
+                                    <div className="text-sm font-medium">Total Transactions</div>
+                                    <div className="text-2xl font-bold">
+                                        {buyingData[selectedYear].reduce((sum, item) => sum + item.transactions, 0).toLocaleString()}
                                     </div>
                                 </div>
-                            </CardContent>
-                        </Card>
-                    </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+    
+                    {/* Property Renting Card */}
+                    <Card>
+                        <CardHeader>
+                            <CardTitle>Property Renting Statistics</CardTitle>
+                            <CardDescription>
+                                Monthly visitor and transaction data for property rentals
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <ChartContainer
+                                config={{
+                                    visitors: {
+                                        label: "Visitors",
+                                        color: "hsl(var(--chart-3))",
+                                    },
+                                    transactions: {
+                                        label: "Transactions",
+                                        color: "hsl(var(--chart-4))",
+                                    },
+                                }}
+                                className="aspect-[4/3] min-h-[300px]"
+                            >
+                                <LineChart data={rentingData[selectedYear]} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                                    <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                                    <XAxis dataKey="month" />
+                                    <YAxis yAxisId="left" orientation="left" />
+                                    <YAxis yAxisId="right" orientation="right" />
+                                    <ChartTooltip content={<ChartTooltipContent />} />
+                                    <Line
+                                        yAxisId="left"
+                                        type="monotone"
+                                        dataKey="visitors"
+                                        stroke="var(--color-visitors)"
+                                        strokeWidth={2}
+                                        activeDot={{ r: 6 }}
+                                    />
+                                    <Line
+                                        yAxisId="right"
+                                        type="monotone"
+                                        dataKey="transactions"
+                                        stroke="var(--color-transactions)"
+                                        strokeWidth={2}
+                                        activeDot={{ r: 6 }}
+                                    />
+                                </LineChart>
+                            </ChartContainer>
+    
+                            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div className="rounded-lg bg-muted p-4">
+                                    <div className="text-sm font-medium">Total Visitors</div>
+                                    <div className="text-2xl font-bold">
+                                        {rentingData[selectedYear].reduce((sum, item) => sum + item.visitors, 0).toLocaleString()}
+                                    </div>
+                                </div>
+                                <div className="rounded-lg bg-muted p-4">
+                                    <div className="text-sm font-medium">Total Transactions</div>
+                                    <div className="text-2xl font-bold">
+                                        {rentingData[selectedYear].reduce((sum, item) => sum + item.transactions, 0).toLocaleString()}
+                                    </div>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    
     )
 }
