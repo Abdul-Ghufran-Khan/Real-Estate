@@ -119,6 +119,10 @@ const BuyHouse = () => {
     console.log("formdata of buy house ==>",values)
     console.log("Inquiry for property:", selectedHouse)
 
+    const CombineBuyData = { ...values , ...selectedHouse}
+    console.log("Combine buy data ==>" , CombineBuyData);
+    
+
     toast.success("Inquiry submitted!", {
       description: `We've received your inquiry for the property in ${selectedHouse?.location}. A real estate agent will contact you shortly.`,
     })

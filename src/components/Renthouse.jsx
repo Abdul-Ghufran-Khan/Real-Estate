@@ -118,10 +118,14 @@ const Renthouse = () => {
     })
   
     function onSubmit(values) {
-      // In a real app, you would send this data to your backend
-      console.log("Formdata of book villa ==>",values)
-      console.log("Booking for property:", selectedHouse)
-  
+        // In a real app, you would send this data to your backend
+        console.log("Formdata of book villa ==>",values)
+        console.log("Booking for property:", selectedHouse)
+
+        const CombineRentData = {...values , ...selectedHouse}
+        console.log("combine objects ==>" , CombineRentData);
+        
+        
       toast.success("Booking request submitted!", {
         description: `We've received your booking request for a property in ${selectedHouse?.location}. We'll contact you shortly.`,
       })

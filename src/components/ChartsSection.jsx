@@ -195,7 +195,7 @@ export default function MonthlyStatsSection() {
                                 </ChartContainer>
                             </div>
     
-                            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
                                 <div className="rounded-lg bg-muted p-3">
                                     <div className="text-sm font-medium">Total Visitors</div>
                                     <div className="text-2xl font-bold">
