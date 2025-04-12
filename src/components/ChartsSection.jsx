@@ -196,7 +196,7 @@ export default function MonthlyStatsSection() {
                             </div>
     
                             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div className="rounded-lg bg-muted p-4">
+                                <div className="rounded-lg bg-muted p-3">
                                     <div className="text-sm font-medium">Total Visitors</div>
                                     <div className="text-2xl font-bold">
                                         {rentingData[selectedYear].reduce((sum, item) => sum + item.visitors, 0).toLocaleString()}
